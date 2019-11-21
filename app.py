@@ -46,7 +46,7 @@ def custom_event(data, methods=['GET', 'POST']):
         # Set a random spawn location
         position = random.randint(0, 100)
         # create player object with position and id
-        player = Player(position, id_)
+        player = Player(position, id_) 
         # append new player to players
         players.append(player)
         # Update gamemap to include player
