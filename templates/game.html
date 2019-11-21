@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/game.css') }}">
+    <title>Our Game</title>
+  </head>
+  <body>
+    <h1>Chat</h1>
+    <div class = "chat">
+    </div>
+    <h1>Map</h1>
+    <div class = "map">
+      <div class= "placeholder">Connecting</div>
+      <canvas></canvas>
+      <script type = "text/javascript">
+
+      </script>
+    </div>
+    <div class = socket>
+      <div class="response"></div>
+      <form action="" method="POST">
+        <input type="text" class="playerid" placeholder="Enter your player id">
+        <input type="text" class="direction" placeholder="Enter a Direction"/>
+        <input type="text" class="message" placeholder="Enter a message"/>
+        <input type="submit"/>
+      </form>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+      <script type="text/javascript">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on( 'connect', function() {
+          socket.emit( 'game-socket', {
+            data: "Connection made with client",
+            player: "None",
+            message: ""
+          } )
+          var form = $( 'form' ).on( 'submit', function( e ) {
+            e.preventDefault()
+            let direction = $( 'input.direction' ).val()
+            let playerid = $( 'input.playerid' ).val()
+            let message = $( 'input.message' ).val()
+            socket.emit( 'game-socket', {
+              data: direction,
+              player: playerid,
+              message: message
+            } )
+            /* resets input */
+            $( 'input.direction' ).val( '' ).focus()
+            $( 'input.message' ).val( '' ).focus()
+          } )
+        })
+        socket.on( 'my response', function( data ) {
+          console.log( data )
+          if ( data.message !== undefined){
+            $( 'div.placeholder ').remove()
+            $( 'div.map' ).append( '<div class= "placeholder"> <b style="color: #000">' + data.data + '</div>' )
+            $( 'div.chat' ).append('<div class= "chat-text"> <b style="color: #000">' + "Player" + data.player+ ': ' + data.message + '</div>')
+          } else {
+            $( 'div.placeholder ').remove()
+            $( 'div.map' ).append( '<div class= "placeholder"> <b style="color: #000">' + data.data + '</div>' )
+          }
+
+        })
+      </script>
+    </div>
+  </body>
+  </html>
