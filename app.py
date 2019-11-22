@@ -1,9 +1,10 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, send, emit
 import random
 from pyscripts.game_classes import *
-import eventlet
-import gevent
+# from gevent import monkey
+
+# monkey.patch_all()
 
 gmap = gameMap()
 gmap.generate_rooms()

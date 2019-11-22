@@ -1,1 +1,1 @@
-gunicorn --worker-class socketio.sgunicorn.GeventSocketIOWorker app:app
+gunicorn --worker-class eventlet -w 1 module:app

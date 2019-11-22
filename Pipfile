@@ -7,11 +7,9 @@ verify_ssl = true
 
 [packages]
 flask = "*"
-flask-socketio = "*"
 gunicorn = "*"
+flask-socketio = "*"
 eventlet = "*"
-gevent = "*"
-gevent-socketio = "*"
 
 [requires]
 python_version = "3.7"
