@@ -10,6 +10,7 @@ flask = "*"
 gunicorn = "*"
 flask-socketio = "*"
 eventlet = "*"
+python-socketio = "*"
 
 [requires]
 python_version = "3.7"
