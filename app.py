@@ -202,5 +202,5 @@ def custom_event(data, methods=['GET', 'POST']):
                 
     
 if __name__ == '__main__':
-    eventlet.monkey_patch()
+    eventlet.monkey_patch(socket=True, select=True)
     socketio.run(app, debug=True)
