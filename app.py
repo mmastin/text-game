@@ -2,7 +2,9 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 import random
 from pyscripts.game_classes import *
+import eventlet
 
+eventlet.monkey_patch()
 
 gmap = gameMap()
 gmap.generate_rooms()
