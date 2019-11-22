@@ -23,7 +23,7 @@ app = Flask(__name__)
 # Set app's secret key
 app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
 # Wrap Socketio around app
-socketio = SocketIO(app, manage_session=False)
+socketio = SocketIO(app)
 
 # Start Screen
 @app.route('/')
