@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0d9c5875ca0860cc8f7fc0028f5650c35aa627618c873c20c3cda63365099908"
+            "sha256": "6675f708ae8d5aa458002dd7d6702df786aa231559f3b779cd896c04a1d1a04d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -82,6 +82,22 @@
             ],
             "index": "pypi",
             "version": "==1.4.0"
+        },
+        "gevent-socketio": {
+            "hashes": [
+                "sha256:53394ab93fbd84d9dbbb2bef85349f6a503bfc53d86a9be8653250f1a0412aff",
+                "sha256:565ec1180223d44c40ccbe1f558c2a378dc43e064254c2fa007834edf439a5ac",
+                "sha256:9289954714a4e598b840ed95bd05b410f7fc001cee9714d223874f3be556551f"
+            ],
+            "index": "pypi",
+            "version": "==0.3.6"
+        },
+        "gevent-websocket": {
+            "hashes": [
+                "sha256:17b67d91282f8f4c973eba0551183fc84f56f1c90c8f6b6b30256f31f66f5242",
+                "sha256:7eaef32968290c9121f7c35b973e2cc302ffb076d018c9068d2f5ca8b2d85fb0"
+            ],
+            "version": "==0.10.1"
         },
         "greenlet": {
             "hashes": [
