@@ -4,8 +4,6 @@ import random
 from pyscripts.game_classes import *
 import eventlet
 
-eventlet.monkey_patch()
-
 gmap = gameMap()
 gmap.generate_rooms()
 num_players = 0
@@ -204,4 +202,5 @@ def custom_event(data, methods=['GET', 'POST']):
                 
     
 if __name__ == '__main__':
+    eventlet.monkey_patch()
     socketio.run(app, debug=True)
