@@ -1,42 +1,54 @@
 <!DOCTYPE html>
   <html>
+    <!-- Meta Data-->
   <head>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/game.css') }}">
     <title>Our Game</title>
   </head>
+  <!-- Web Page -->
   <body>
-    <h1>Chat</h1>
-    <div class = "chat">
-    </div>
-    <h1>Map</h1>
-    <div class = "map">
-      <div class= "placeholder">Connecting</div>
-      <canvas></canvas>
-      <script type = "text/javascript">
-
-      </script>
-    </div>
-    <div class = socket>
-      <div class="response"></div>
-      <form action="" method="POST">
-        <input type="text" class="playerid" placeholder="Enter your player id">
-        <input type="text" class="direction" placeholder="Enter a Direction"/>
-        <input type="text" class="message" placeholder="Enter a message"/>
-        <input type="submit"/>
-      </form>
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-      <script type="text/javascript">
-        // var socket = io.connect('http://' + document.domain + ':' + location.port);
-        var socket = io.connect();
-        socket.on( 'connect', function() {
-          socket.emit( 'game-socket', {
-            data: "Connection made with client",
-            player: "None",
-            message: ""
-          } )
-          var form = $( 'form' ).on( 'submit', function( e ) {
+    <div class = "message-container">
+      <!-- Container that holds all chat messages -->
+      <div class = "chat">
+        <h1>Chatroom</h1>
+      </div>
+      <div class = "game-screen">
+        <h1> Game Screen</h1>
+        <div class = "game-data"></div>
+      </div>
+    </div>  
+    <!-- Container that holds the map, gamescreen, and user input containers-->
+    <div class = "game-container">
+      <h1>Game Map</h1>
+      <!-- Container that holds the map -->
+      <div class = "map">
+        <!-- Placeholder container that displays while connecting -->
+        <div class= "placeholder">Connecting</div>
+      </div>
+      <!-- Container that holds our form and socket -->
+      <div class = socket>
+        <!-- Webform -->
+        <form action="" method="POST">
+          <input type="text" class="playerid" placeholder="Enter your player id">
+          <input type="text" class="direction" placeholder="Enter a Direction"/>
+          <input type="text" class="message" placeholder="Enter a message"/>
+          <input type="submit"/>
+        </form>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+        <!-- Script that connects a client to our socket -->
+        <script type="text/javascript">
+          /* Runs when client first connects to socket */
+          var socket = io.connect('http://' + document.domain + ':' + location.port);
+          socket.on( 'connect', function(){
+            socket.emit( 'game-socket', {
+              data: "Connection made with client",
+              player: "None",
+              message: ""
+            })
+          /* Runs when user submits form */
+          var form = $( 'form' ).on( 'submit', function( e ){
             e.preventDefault()
             let direction = $( 'input.direction' ).val()
             let playerid = $( 'input.playerid' ).val()
@@ -45,25 +57,27 @@
               data: direction,
               player: playerid,
               message: message
-            } )
+            })
             /* resets input */
-            $( 'input.direction' ).val( '' ).focus()
             $( 'input.message' ).val( '' ).focus()
-          } )
+          })
         })
-        socket.on( 'my response', function( data ) {
-          console.log( data )
-          if ( data.message !== undefined){
+          /* Runs when data is recieved from backend */
+          socket.on( 'my response', function( data ) {
+            console.log( data )
+            if ( data.message !== undefined){
+              $( 'div.chat' ).append('<div class= "chat-text"> <p class = "chat-message">' + "Player " + data.player+ ': ' + data.message + '</div>')
+            } 
+            if (data.event !== undefined){
+              $( 'div.game-screen' ).append('<div class= "game-data"> <p class = "game-message">' + "Player " + data.player + data.event + '</div>')
+            }
             $( 'div.placeholder ').remove()
-            $( 'div.map' ).append( '<div class= "placeholder"> <b style="color: #000">' + data.data + '</div>' )
-            $( 'div.chat' ).append('<div class= "chat-text"> <b style="color: #000">' + "Player" + data.player+ ': ' + data.message + '</div>')
-          } else {
-            $( 'div.placeholder ').remove()
-            $( 'div.map' ).append( '<div class= "placeholder"> <b style="color: #000">' + data.data + '</div>' )
-          }
-
-        })
-      </script>
+            for (var x = 0; x < 100; x++){
+              $( 'div.map' ).append( '<div class= "placeholder"> <p class = "value">' + data.data[x] + '</p></div>' )
+              }
+            })
+        </script>
+      </div>
     </div>
   </body>
   </html>

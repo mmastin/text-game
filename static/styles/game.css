@@ -1,16 +1,81 @@
-html{
-    width: 100%;
+html, body {
+    margin: 0;
     height: 100%;
 }
 
-.map{
-    border: 5px solid black;
+body{
+    background-color: rgb(27, 27, 27);
+    display:flex;
 }
 
+.game-container{
+    border: 5px solid black; 
+    display:flex;
+    flex-direction:column;
+    width: 60%; 
+    align-items:center; 
+}
+.game-container h1{
+    text-align:center; 
+    margin-bottom: 20px;
+}
+p, h1{
+    color:white; 
+}
+.map{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+    background-color: #2196F3;
+    padding: 5px;
+    width: 70%; 
+    height: 70%;
+}
+
+.placeholder{
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: center; 
+}
 .chat{
     border: 5px solid black;
+    border-right: 2.5px;
+    margin-left: 0;
+    margin-right:0;
+    height: 50%; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: auto; 
+}
+
+.chat h1{
+    text-align:center; 
+    margin-bottom: 40px;
+}
+
+.chat p{
+    font-size: 20px;
 }
 
 .socket{
-    border: 5px solid black;
+    border-top: 5px solid black;
+    margin-top:auto; 
+}
+.value{
+    color:black;
+}
+
+.message-container{
+    display:flex;
+    flex-direction: column; 
+    width: 40%;
+}
+
+.game-screen{
+    height: 50%; 
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+.game-screen h1{
+    text-align:center;
 }

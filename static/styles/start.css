@@ -33,3 +33,7 @@ body{
     background-color: black; 
     border-radius: 30%; 
 }
+
+h2, p{
+    color:white;
+}
