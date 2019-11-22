@@ -121,7 +121,7 @@ def custom_event(data, methods=['GET', 'POST']):
                             gmap.map[new_position] = id_
                             global deaths
                             deaths += 1
-                            event = f" has killed Player {enemy_id}"
+                            event = f" killed Player {enemy_id}"
                             data = {"data": gmap.map, "player": id_, "event": event}
                             return socketio.emit('my response', data)
                         # runs if they are alive
@@ -134,7 +134,7 @@ def custom_event(data, methods=['GET', 'POST']):
                             gmap.map[position] = 0
                             gmap.map[enemy_position] = id_
                             gmap.map[flee_to] = enemy_id
-                            event = f" has attacked Player {enemy_id}, causing them to flee with {enemy_health} health remaining"
+                            event = f" attacked Player {enemy_id}, causing them to flee with {enemy_health} health remaining"
                             data = {"data": gmap.map, "player": id_, "attack": 1, "event": event}
                             return socketio.emit('my response', data)
                     # Runs if health potion was found
@@ -142,21 +142,21 @@ def custom_event(data, methods=['GET', 'POST']):
                         gmap.map[position] = 0
                         gmap.map[new_position] = id_
                         players[id_ - 1].health += 20
-                        event = f" has found a health potion. Their health has rose to {players[id_ -1].health}"
+                        event = f" found a health potion. Their health has risen to {players[id_ -1].health}"
                         data = {"data" : gmap.map, "player": id_, "event": event}
                         return socketio.emit('my response', data)
                     elif (gmap.map[new_position] == "(^)"):
                         gmap.map[position] = 0
                         gmap.map[new_position] = id_
                         players[id_ - 1].strength += 20
-                        event = f" has found a strength potion. Their strength has rose to {players[id_ -1].strength}"
+                        event = f" found a strength potion. Their strength has risen to {players[id_ -1].strength}"
                         data = {"data" : gmap.map, "player": id_, "event": event}
                         return socketio.emit('my response', data)
                     elif (gmap.map[new_position] == "(!)"):
                         gmap.map[position] = 0
                         gmap.map[new_position] = id_
                         players[id_ - 1].health -= 20
-                        event = f" has stepped on a trap. Their remaining health is {players[id_ -1].health}"
+                        event = f" stepped on a trap. Their remaining health is {players[id_ -1].health}"
                         data = {"data" : gmap.map, "player": id_, "event": event}
                         return socketio.emit('my response', data)
                      # Runs if room is empty
@@ -164,39 +164,39 @@ def custom_event(data, methods=['GET', 'POST']):
                         # if the direction the user chose was north, and they are on the top of the map
                         if (direction == "n") and (position in bad_norths):
                             # return current map
-                            event = " has attempted to escape the dungeon"
+                            event = " attempted to escape the dungeon"
                             data = {"data": gmap.map, "player": id_, "event": event}
                             return socketio.emit('my response', data)
                         # if the direction is south and they are on the bottom of the map
                         elif (direction == "s") and (position in bad_souths):
-                            event = " has attempted to escape the dungeon"
+                            event = " attempted to escape the dungeon"
                             data = {"data": gmap.map, "player": id_, "event": event}
                             return socketio.emit('my response', data)
                         # if the direction they chose was west and they are on the left of the map
                         elif (direction == "w") and (position in bad_wests):
-                            event = " has attempted to escape the dungeon"
+                            event = " attempted to escape the dungeon"
                             data = {"data": gmap.map, "player": id_, "event": event}
                             return socketio.emit('my response', data)
                         # if the direction is east and they are on the right of the map
                         elif (direction == "e") and (position in bad_easts):
-                            event = " has attempted to escape the dungeon"
+                            event = " attempted to escape the dungeon"
                             data = {"data": gmap.map, "player": id_, "event": event}
                             return socketio.emit('my response', data)
                         else:
                             gmap.map[position] = 0
                             gmap.map[new_position] = id_
                             current_room = gmap.rooms[new_position]
-                            event = f" has moved to {current_room.name}"
+                            event = f" moved to {current_room.name}"
                             data = {"data": gmap.map, "player": id_, "event":event}
                             return socketio.emit('my response', data)
                 # Runs if new position puts player off map
                 else:
-                    event = " has attempted to escape the dungeon"
+                    event = " attempted to escape the dungeon"
                     data = {"data": gmap.map, "player": id_, "event": event}
                     return socketio.emit('my response', data)
             # If the input direction isn't valid
             else:
-                event = " has attempted to escape the dungeon"
+                event = " attempted to escape the dungeon"
                 data = {"data": gmap.map, "player": id_, "event": event}
                 return socketio.emit('my response', data)
                 
