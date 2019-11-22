@@ -9,7 +9,7 @@ verify_ssl = true
 gunicorn = "==19.8.1"
 eventlet = "==0.23.0"
 flask-socketio = "==2.9.6"
-flask = "==0.12.4"
+flask = "==1.0"
 python-socketio = "==1.9.0"
 
 [requires]
