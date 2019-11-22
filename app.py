@@ -3,6 +3,7 @@ from flask_socketio import SocketIO
 import random
 from pyscripts.game_classes import *
 import eventlet
+import gevent
 
 gmap = gameMap()
 gmap.generate_rooms()
@@ -202,5 +203,5 @@ def custom_event(data, methods=['GET', 'POST']):
                 
     
 if __name__ == '__main__':
-    eventlet.monkey_patch(socket=True, select=True)
+    # eventlet.monkey_patch(socket=True, select=True)
     socketio.run(app, debug=True)
